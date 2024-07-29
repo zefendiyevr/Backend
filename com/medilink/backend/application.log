@@ -1,0 +1,36 @@
+2024-07-12T11:23:42.552+04:00  INFO 23600 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Starting BackendApplication using Java 20.0.1 with PID 23600 (C:\MyDocuments\myprojects\MediLink\backend\target\classes started by ziyar in C:\MyDocuments\myprojects\MediLink\backend)
+2024-07-12T11:23:42.553+04:00  INFO 23600 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-07-12T11:23:42.588+04:00  INFO 23600 --- [backend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-12T11:23:42.590+04:00  INFO 23600 --- [backend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-12T11:23:43.194+04:00  INFO 23600 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-12T11:23:43.202+04:00  INFO 23600 --- [backend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-12T11:23:43.202+04:00  INFO 23600 --- [backend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-12T11:23:43.230+04:00  INFO 23600 --- [backend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-12T11:23:43.230+04:00  INFO 23600 --- [backend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 640 ms
+2024-07-12T11:23:43.454+04:00  INFO 23600 --- [backend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-12T11:23:43.476+04:00  INFO 23600 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-12T11:23:43.483+04:00  INFO 23600 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Started BackendApplication in 1.214 seconds (process running for 1.814)
+2024-07-12T11:26:12.548+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-12T11:26:12.549+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-12T11:26:12.549+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2024-07-12T11:26:12.564+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.backend.Security.LoggerInterceptor   : [preHandle][org.apache.catalina.connector.RequestFacade@540bdcd9][GET]/api/v1/checkconnection?&_psip=0:0:0:0:0:0:0:1
+2024-07-12T11:26:12.578+04:00  WARN 23600 --- [backend] [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingRequestHeaderException: Required request header 'CurrentDatetime' for method parameter type String is not present]
+2024-07-12T11:26:12.578+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.b.Security.SecurityInterceptor       : [afterCompletion][org.apache.catalina.connector.RequestFacade@540bdcd9][exception: null]
+2024-07-12T11:26:12.579+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.backend.Security.LoggerInterceptor   : [afterCompletion][org.apache.catalina.connector.RequestFacade@540bdcd9][exception: null]
+2024-07-12T11:26:12.584+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.backend.Security.LoggerInterceptor   : [preHandle][org.apache.catalina.core.ApplicationHttpRequest@6c32e7fe][GET]/error?&_psip=0:0:0:0:0:0:0:1
+2024-07-12T11:26:12.622+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.b.Security.SecurityInterceptor       : [postHandle][org.apache.catalina.core.ApplicationHttpRequest@6c32e7fe]
+2024-07-12T11:26:12.623+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.backend.Security.LoggerInterceptor   : [postHandle][org.apache.catalina.core.ApplicationHttpRequest@6c32e7fe]
+2024-07-12T11:26:12.623+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.b.Security.SecurityInterceptor       : [afterCompletion][org.apache.catalina.core.ApplicationHttpRequest@6c32e7fe][exception: null]
+2024-07-12T11:26:12.623+04:00  INFO 23600 --- [backend] [http-nio-8080-exec-1] c.m.backend.Security.LoggerInterceptor   : [afterCompletion][org.apache.catalina.core.ApplicationHttpRequest@6c32e7fe][exception: null]
+2024-07-12T11:30:40.206+04:00  INFO 23600 --- [backend] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (1 addition, 0 deletions, 0 modifications)
+2024-07-12T11:30:41.898+04:00  INFO 23600 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Starting BackendApplication using Java 20.0.1 with PID 23600 (C:\MyDocuments\myprojects\MediLink\backend\target\classes started by ziyar in C:\MyDocuments\myprojects\MediLink\backend)
+2024-07-12T11:30:41.898+04:00  INFO 23600 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-07-12T11:30:42.049+04:00  INFO 23600 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-12T11:30:42.051+04:00  INFO 23600 --- [backend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-12T11:30:42.051+04:00  INFO 23600 --- [backend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-12T11:30:42.060+04:00  INFO 23600 --- [backend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-12T11:30:42.060+04:00  INFO 23600 --- [backend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 159 ms
+2024-07-12T11:30:42.126+04:00  INFO 23600 --- [backend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-12T11:30:42.133+04:00  INFO 23600 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-12T11:30:42.136+04:00  INFO 23600 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Started BackendApplication in 0.259 seconds (process running for 420.468)
+2024-07-12T11:30:42.137+04:00  INFO 23600 --- [backend] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

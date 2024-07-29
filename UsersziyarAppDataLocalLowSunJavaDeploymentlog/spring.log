@@ -1,0 +1,24 @@
+2024-07-12T10:46:44.264+04:00  INFO 3692 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Starting BackendApplication using Java 20.0.1 with PID 3692 (C:\MyDocuments\myprojects\MediLink\backend\target\classes started by ziyar in C:\MyDocuments\myprojects\MediLink\backend)
+2024-07-12T10:46:44.265+04:00  INFO 3692 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-07-12T10:46:44.302+04:00  INFO 3692 --- [backend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-12T10:46:44.302+04:00  INFO 3692 --- [backend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-12T10:46:44.996+04:00  INFO 3692 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-12T10:46:45.008+04:00  INFO 3692 --- [backend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-12T10:46:45.008+04:00  INFO 3692 --- [backend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-12T10:46:45.043+04:00  INFO 3692 --- [backend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-12T10:46:45.044+04:00  INFO 3692 --- [backend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 740 ms
+2024-07-12T10:46:45.372+04:00  INFO 3692 --- [backend] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-07-12T10:46:45.400+04:00  INFO 3692 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-07-12T10:46:45.408+04:00  INFO 3692 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Started BackendApplication in 1.476 seconds (process running for 2.151)
+2024-07-12T10:46:50.261+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-12T10:46:50.261+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-07-12T10:46:50.262+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-07-12T10:46:58.037+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.backend.Security.LoggerInterceptor   : [preHandle][org.apache.catalina.connector.RequestFacade@3ca8b2e3][GET]/api/v1/checkconnection?&_psip=0:0:0:0:0:0:0:1
+2024-07-12T10:46:59.207+04:00  WARN 3692 --- [backend] [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingRequestHeaderException: Required request header 'CurrentDatetime' for method parameter type String is not present]
+2024-07-12T10:46:59.207+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.b.Security.SecurityInterceptor       : [afterCompletion][org.apache.catalina.connector.RequestFacade@3ca8b2e3][exception: null]
+2024-07-12T10:46:59.617+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.backend.Security.LoggerInterceptor   : [afterCompletion][org.apache.catalina.connector.RequestFacade@3ca8b2e3][exception: null]
+2024-07-12T10:47:00.427+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.backend.Security.LoggerInterceptor   : [preHandle][org.apache.catalina.core.ApplicationHttpRequest@31f056ec][GET]/error?&_psip=0:0:0:0:0:0:0:1
+2024-07-12T10:47:01.286+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.b.Security.SecurityInterceptor       : [postHandle][org.apache.catalina.core.ApplicationHttpRequest@31f056ec]
+2024-07-12T10:47:01.558+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.backend.Security.LoggerInterceptor   : [postHandle][org.apache.catalina.core.ApplicationHttpRequest@31f056ec]
+2024-07-12T10:47:01.558+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.b.Security.SecurityInterceptor       : [afterCompletion][org.apache.catalina.core.ApplicationHttpRequest@31f056ec][exception: null]
+2024-07-12T10:47:01.959+04:00  INFO 3692 --- [backend] [http-nio-8080-exec-2] c.m.backend.Security.LoggerInterceptor   : [afterCompletion][org.apache.catalina.core.ApplicationHttpRequest@31f056ec][exception: null]

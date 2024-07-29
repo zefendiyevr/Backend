@@ -1,0 +1,16 @@
+2024-07-30T00:12:38.937+04:00  INFO 13808 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : Starting BackendApplication using Java 20.0.1 with PID 13808 (C:\MyDocuments\myprojects\MediLink\backend\target\classes started by ziyar in C:\MyDocuments\myprojects\MediLink\backend)
+2024-07-30T00:12:38.944+04:00  INFO 13808 --- [backend] [restartedMain] c.medilink.backend.BackendApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-07-30T00:12:39.013+04:00  INFO 13808 --- [backend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-07-30T00:12:39.013+04:00  INFO 13808 --- [backend] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-07-30T00:12:40.077+04:00  INFO 13808 --- [backend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-30T00:12:40.122+04:00  INFO 13808 --- [backend] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 JPA repository interfaces.
+2024-07-30T00:12:40.880+04:00  INFO 13808 --- [backend] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-07-30T00:12:40.898+04:00  INFO 13808 --- [backend] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-07-30T00:12:40.899+04:00  INFO 13808 --- [backend] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2024-07-30T00:12:40.968+04:00  INFO 13808 --- [backend] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-07-30T00:12:40.968+04:00  INFO 13808 --- [backend] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1954 ms
+2024-07-30T00:12:41.238+04:00  INFO 13808 --- [backend] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-30T00:12:41.360+04:00  INFO 13808 --- [backend] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.9.Final
+2024-07-30T00:12:41.424+04:00  INFO 13808 --- [backend] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-07-30T00:12:41.847+04:00  INFO 13808 --- [backend] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-30T00:12:41.893+04:00  INFO 13808 --- [backend] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
