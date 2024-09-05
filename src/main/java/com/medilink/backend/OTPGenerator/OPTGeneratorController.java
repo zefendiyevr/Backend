@@ -21,8 +21,6 @@ public class  OPTGeneratorController {
     public  String OTPGenerator(){
 
 
-
-
         LocalDateTime myObj = LocalDateTime.now();
         System.out.println(LocalDateTime.now().toString());
        // Long tt=(Long)LocalDateTime.now();

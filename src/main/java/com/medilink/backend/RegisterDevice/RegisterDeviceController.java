@@ -13,9 +13,9 @@ public class RegisterDeviceController {
     public RegisterDeviceService registerDeviceService;
 
     @PostMapping("/registerdevice")
-    public MedilinkResponsTmp RegisterDevice(@RequestHeader String CurrentDatetime, String Token ,
+    public MedilinkResponsTmp RegisterDevice(@RequestHeader String CurrentDatetime, @RequestHeader String Nonce, String Token ,
                                              @RequestBody DeviceRegister deviceRegister) {
-        return registerDeviceService.registerDevice(deviceRegister.DeviceName, deviceRegister.DeviceUid);
+        return registerDeviceService.registerDevice(deviceRegister.DeviceName, deviceRegister.DeviceUid, deviceRegister.Lang);
 
     }
 }

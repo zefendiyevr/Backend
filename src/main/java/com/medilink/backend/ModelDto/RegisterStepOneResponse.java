@@ -12,10 +12,14 @@ public class RegisterStepOneResponse {
     public String Code;
 
     public String Value;
-    public RegisterStepOneResponse(String message, String code, String value ) {
+
+    public String PId;
+    public RegisterStepOneResponse(String message, String code, String value,String pid ) {
         Message = message;
         Code = code;
         Value=value;
+        PId=pid;
+
     }
 
 }

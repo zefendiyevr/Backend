@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,9 @@ import java.util.Enumeration;
 public class LoggerInterceptor implements HandlerInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
-    OTPGeneratorServises otpGeneratorServises=new OTPGeneratorServises();
+    OTPGeneratorServises otpGeneratorServises = new OTPGeneratorServises();
+    @Value("${encript.salt}")
+    private  String encriptsalt;
     @Override
     public boolean preHandle(
             HttpServletRequest request,
@@ -36,24 +39,35 @@ public class LoggerInterceptor implements HandlerInterceptor {
             Integer responseCod=response.getStatus();
 
 
-            System.out.println(responseCod);
-            if (responseCod==200) {
-                if (!CheckConnectionKey(request.getHeader("CurrentDatetime"), request.getHeader("Token"))) {
-                    response.getWriter().write(new Gson().toJson(createJson(403, "403 - Forbidden")));
-                    response.setStatus(403);
-                    return false;
-                }
-            } else  {
+        System.out.println("Salam:"+ responseCod.toString());
 
-                response.getWriter().write(new Gson().toJson(createJson( responseCod, "Server Internal Error")));
-                response.setStatus(responseCod);
+        if (responseCod == 200) {
+            System.out.println("Step2: "+request.getHeader("CurrentDatetime") +"{----------}"+ request.getHeader("Token"));
+
+            if (!CheckConnectionKey(
+                    request.getHeader("CurrentDatetime"),
+                    request.getHeader("Nonce") ,
+                    request.getHeader("Token"),
+                    encriptsalt)
+            ) {
+
+                System.out.println("Step3: "+request.getHeader("CurrentDatetime") +"{----------}"+ request.getHeader("Token"));
+
+
+                response.getWriter().write(new Gson().toJson(createJson(403, "403 - Forbidden")));
+                response.setStatus(403);
                 return false;
             }
-
+        } else {
+            System.out.println("Step4");
+            response.getWriter().write(new Gson().toJson(createJson(responseCod, "Server Internal Error")));
+            response.setStatus(responseCod);
+            return false;
+        }
+        System.out.println("Step5");
 
         return true;
     }
-
 
 
     @Override
@@ -63,9 +77,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
             Object handler,
             ModelAndView modelAndView) throws Exception {
 
-        log.info("** Medlink Log type:Response ---Status:"+response.getStatus()+"  Respons Message boady:"+response);
-
-
+        //      log.info("** Medlink Log type:Response ---Status:"+response.getStatus()+"  Respons Message boady:"+response);
 
 
     }
@@ -74,21 +86,23 @@ public class LoggerInterceptor implements HandlerInterceptor {
     public void afterCompletion(
             HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
-        if (ex != null){
+        if (ex != null) {
             ex.printStackTrace();
         }
-
+        System.out.println("afterComplation");
         log.info("[afterCompletion][" + request + "][exception: " + ex + "]");
     }
 
     private String getRemoteAddr(HttpServletRequest request) {
         String ipFromHeader = request.getHeader("X-FORWARDED-FOR");
+        System.out.println("Getremote address");
         if (ipFromHeader != null && ipFromHeader.length() > 0) {
             log.debug("ip from proxy - X-FORWARDED-FOR : " + ipFromHeader);
             return ipFromHeader;
         }
         return request.getRemoteAddr();
     }
+
     private String getParameters(HttpServletRequest request) {
         StringBuffer posted = new StringBuffer();
         Enumeration<?> e = request.getParameterNames();
@@ -112,69 +126,77 @@ public class LoggerInterceptor implements HandlerInterceptor {
         String ip = request.getHeader("X-FORWARDED-FOR");
         String ipAddr = (ip == null) ? getRemoteAddr(request) : ip;
         System.out.print(ipAddr);
-        if (ipAddr!=null && !ipAddr.equals("")) {
+        if (ipAddr != null && !ipAddr.equals("")) {
             posted.append("&_psip=" + ipAddr);
         }
         return posted.toString();
     }
 
-   // Check connection key
-    private boolean CheckConnectionKey(String HeaderKeyDateTime, String BodyKey) throws ParseException {
-        String GeneretedKey=MedilinkLogikEncription(otpGeneratorServises.DatetimeToLong(HeaderKeyDateTime).toString(),
-                HeaderKeyDateTime.substring(0,4),HeaderKeyDateTime.substring(5,7),
-                HeaderKeyDateTime.substring(8,10));
-            return GeneretedKey.trim().equals(BodyKey.trim());
-     }
+    // Check connection key
+    private boolean CheckConnectionKey(
+            String HeaderKeyDateTime,
+            String Nonce,
+            String BodyKey,
+            String Salt) throws ParseException {
 
-   //Generate  Json Message for Forbitten error
-     private MedilinkResponsTmp createJson( Integer code, String Message ){
-         MedilinkResponsTmp medilinkResponsTmp=new MedilinkResponsTmp();
-         Data data = new Data();
-         ArrayList<EnumTemp> enumTemp= new ArrayList<>();
-         enumTemp.add(new EnumTemp(code, Message));
-         //enumTemp.add(new EnumTemp(code+1, Message));
-         data.data=enumTemp;
-         medilinkResponsTmp.code=code.toString();
-         medilinkResponsTmp.message=Message;
-         medilinkResponsTmp.response=data;
-         return medilinkResponsTmp;
+
+         String Key=HeaderKeyDateTime+Nonce+Salt+otpGeneratorServises.DatetimeToLong(HeaderKeyDateTime);
+
+          String GenKey=MD5(Key);
+        System.out.println("After Hash :  "+Key+"     Generate Key : "+GenKey+"="+BodyKey);
+        return GenKey.trim().equals(BodyKey.trim());
     }
-     //encription Algoritm for Medilink
-     private String MedilinkLogikEncription(String TOTP, String Il, String Ay, String Gun ){
-         return MD5(MD5(MD5(MD5(TOTP)+Il)+Ay)+Gun);
-     }
+
+    //Generate  Json Message for Forbitten error
+    private MedilinkResponsTmp createJson(Integer code, String Message) {
+        MedilinkResponsTmp medilinkResponsTmp = new MedilinkResponsTmp();
+        Data data = new Data();
+        ArrayList<EnumTemp> enumTemp = new ArrayList<>();
+        enumTemp.add(new EnumTemp(code, Message));
+        //enumTemp.add(new EnumTemp(code+1, Message));
+        data.data = enumTemp;
+        medilinkResponsTmp.code = code.toString();
+        medilinkResponsTmp.message = Message;
+        medilinkResponsTmp.response = data;
+        return medilinkResponsTmp;
+    }
 
 
 
-     //MD5 Generator
-     private String MD5(String InputKey) {
+    //MD5 Generator
+    private String MD5(String InputKey) {
 
-         String ReturnedMD5String = null;
+        String ReturnedMD5String = null;
 
-         try {
-             // Create MessageDigest instance for MD5
-             MessageDigest md = MessageDigest.getInstance("MD5");
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
 
-             // Add password bytes to digest
+            // Add password bytes to digest
 
-             md.update(InputKey.getBytes());
+            md.update(InputKey.getBytes());
 
-             // Get the hash's bytes
-             byte[] bytes = md.digest();
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
 
-             // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
-             StringBuilder sb = new StringBuilder();
-             for (int i = 0; i < bytes.length; i++) {
-                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-             }
+            // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
 
-             // Get complete hashed password in hex format
-             ReturnedMD5String = sb.toString();
-         } catch (NoSuchAlgorithmException e) {
-             e.printStackTrace();
-         }
-         return ReturnedMD5String;
+            // Get complete hashed password in hex format
+            ReturnedMD5String = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
 
 
-      }
+        System.out.println(InputKey +"---------generate MD5------------->"+ReturnedMD5String);
+
+
+        return ReturnedMD5String;
+
+
+    }
 }

@@ -4,5 +4,7 @@ public class DeviceRegister {
     public String DeviceName;
     public String DeviceUid;
 
+    public String Lang;
+
 
 }

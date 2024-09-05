@@ -22,8 +22,13 @@ public class OTPGeneratorServises {
    }
 
     public Long DatetimeToLong(String DateTime) throws ParseException {
+
         dateTimeOperation.DadetimeString=DateTime;
-        return dateTimeOperation.DatetimeToLong();
+
+        Long LongDatatime=dateTimeOperation.DatetimeToLong();
+        System.out.println("DateTimeString------->DatetimeLong");
+
+        return LongDatatime;
     }
 
    public String TOTPgenetator(long TimeNumber, long Xtime )
@@ -44,15 +49,15 @@ public class OTPGeneratorServises {
 
 
        try {
-//           System.out.println(
-//                   "+---------------+-----------------------+" +
-//                           "------------------+--------+--------+");
-//           System.out.println(
-//                   "|  Time(sec)    |   Time (UTC format)   " +
-//                           "| Value of T(Hex)  |  TOTP  | Mode   |");
-//           System.out.println(
-//                   "+---------------+-----------------------+" +
-//                           "------------------+--------+--------+");
+           System.out.println(
+                   "+---------------+-----------------------+" +
+                           "------------------+--------+--------+");
+           System.out.println(
+                   "|  Time(sec)    |   Time (UTC format)   " +
+                           "| Value of T(Hex)  |  TOTP  | Mode   |");
+           System.out.println(
+                   "+---------------+-----------------------+" +
+                           "------------------+--------+--------+");
 
 
 

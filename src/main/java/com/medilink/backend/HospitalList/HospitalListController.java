@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/")
 public class HospitalListController {
     @Autowired
-    HospitalListService hospitalListService;
+    public HospitalListService hospitalListService;
 
 
     @PostMapping("/hospitallist")
-    public MedilinkResponsTmp HospitalList(@RequestHeader String CurrentDatetime, String Token ,
+    public MedilinkResponsTmp HospitalList(@RequestHeader String CurrentDatetime,  @RequestHeader String Nonce, @RequestHeader String Token ,
                                              @RequestBody HospitalList hospitalList) {
 
 
-        MedilinkResponsTmp  xxx= hospitalListService.hospitalList(hospitalList.Lang);
+        MedilinkResponsTmp  medilinkResponsTmp= hospitalListService.HospitalList(hospitalList.Lang);
 
 
-        return xxx;
+        return medilinkResponsTmp;
 
     }
 }

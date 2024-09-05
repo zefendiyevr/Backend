@@ -22,7 +22,7 @@ public class OTPAcceptController {
 
     }
     @PostMapping("/CheckOtpMobile")
-    public MedilinkResponsTmp CheckOtpMobile(@RequestHeader String CurrentDatetime, String Token ,
+    public MedilinkResponsTmp CheckOtpMobile(@RequestHeader String CurrentDatetime, @RequestHeader String Nonce ,  @RequestHeader String Token ,
                                            @RequestBody OTPCheck otpCheck) throws ParseException {
 
         return otpAcceptServise.CheckOtpMobile(otpCheck.OTP, otpCheck.OtpId);

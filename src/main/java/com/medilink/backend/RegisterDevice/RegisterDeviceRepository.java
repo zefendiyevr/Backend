@@ -16,7 +16,7 @@ public  class RegisterDeviceRepository  {
 
    @Autowired
    private EntityManager entityManager;
-   public List<?> getAllResult(String DeviceName, String DeviceOid) {
+   public List<?> getAllResult(String DeviceName, String DeviceOid, String Lang) {
 
        Query q = (Query) entityManager.createNativeQuery("select RegisterDevice('" + DeviceName + "','" + DeviceOid + "')");
        List<CheckConnectionRespons> results = q.getResultList();

@@ -13,6 +13,7 @@ public class SMSSend  {
     private String  smspass;
     @Value("${sms.sendername}")
     private String  smssendername;
+
     private String MessageBoady;
     private String togsm;
     public String getTogsm() {

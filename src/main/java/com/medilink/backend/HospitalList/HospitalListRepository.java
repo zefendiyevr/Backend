@@ -11,8 +11,10 @@ import java.util.List;
 public class HospitalListRepository {
 
     @Autowired
-    private EntityManager entityManager;
-    public List<?> getHospitalList(String Lang) {
+     EntityManager entityManager;
+
+
+    public List<?> GetHospitalList(String Lang) {
         Query q = (Query) entityManager.createNativeQuery("CALL ListofHospital() ");
         List<?> results = q.getResultList();
         return results;

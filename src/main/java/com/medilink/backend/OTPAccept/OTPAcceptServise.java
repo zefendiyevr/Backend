@@ -1,5 +1,6 @@
 package com.medilink.backend.OTPAccept;
 
+import com.medilink.backend.DayTokenGet.DayTokenGetService;
 import com.medilink.backend.ModelDto.*;
 import com.medilink.backend.OTPGenerator.OTPGeneratorServises;
 import com.medilink.backend.SMSSend.SMSSendService;
@@ -23,6 +24,8 @@ public class OTPAcceptServise extends SMSSendService {
     OTPGeneratorServises otpGeneratorServises;
     @Autowired
     SMSSendService smsSendService;
+    @Autowired
+    DayTokenGetService dayTokenGetService;
 
 
 
@@ -35,7 +38,10 @@ public class OTPAcceptServise extends SMSSendService {
         //Otp düzəldilməsi üçün OTP generatora göndərilir
          String GeneratedTOTP=otpGeneratorServises.TOTPgenetator(CurrentDateTimeLong,180);
         //göndəriləcək OTP Db yə yazılır
-         List<?> otpSendingIbfToDB= otpAcceptRepository.RegOTPMobile(PId,GeneratedTOTP,SentTo,RId);
+
+        // List<?> otpSendingIbfToDB= otpAcceptRepository.RegOTPMobile(PId,GeneratedTOTP,SentTo,RId);
+
+        List<?> otpSendingIbfToDB= otpAcceptRepository.RegOTPMobile(PId,"000000",SentTo,RId);
         //Qayıdan məlumat map edilir
           ArrayList<ResponsMessageMap> responsMessageMap= ResponsMessajMaping(otpSendingIbfToDB.get(0).toString());
         // qayıdan cavab hər hansı OTP nin dbyə yazılma İD-sisirsə ozaman SMS göndərilmə prosesi başlayır
@@ -77,14 +83,15 @@ public class OTPAcceptServise extends SMSSendService {
 
    public MedilinkResponsTmp CheckOtpMobile(String Otp, Integer  OtpId){
        ArrayList<ResponsMessageMap> responsMessageMap =new ArrayList<ResponsMessageMap>();
-
        MedilinkResponsTmp medilinkResponsTmp = new MedilinkResponsTmp();
        Data data = new Data();
        String Response=otpAcceptRepository.CheckOtpMobile(Otp,OtpId).get(0).toString();
+       System.out.println(Response);
        responsMessageMap=ResponsMessajMaping(Response);
        medilinkResponsTmp.code= responsMessageMap.get(0).getMessageCode().toString();
        medilinkResponsTmp.message=responsMessageMap.get(0).getMessage().toString();
        medilinkResponsTmp.response=data;
+       responsMessageMap.get(0).setOtpId(responsMessageMap.get(0).getMessageValue());
        data.data=responsMessageMap;
        return medilinkResponsTmp;
    }
@@ -98,25 +105,96 @@ public class OTPAcceptServise extends SMSSendService {
 
     public ArrayList<ResponsMessageMap> ResponsMessajMaping(String ResponsMessage){
        ArrayList<ResponsMessageMap> responsMessageMap=new ArrayList<ResponsMessageMap>();
+      System.out.println(ResponsMessage);
+
         List MessageMap= List.of(ResponsMessage.split("@"));
 
-        if( MessageMap.size()>3) {
-            responsMessageMap.add(new ResponsMessageMap(MessageMap.get(0).toString(),
-                    Integer.parseInt(MessageMap.get(1).toString()),
-                    MessageMap.get(2).toString(), MessageMap.get(3).toString(),null));
-        } else{
+        switch(MessageMap.size()) {
+            case 8:  responsMessageMap.add(new ResponsMessageMap(
+                            MessageMap.get(0).toString(),
+                            Integer.parseInt(MessageMap.get(1).toString()),
+                            MessageMap.get(2).toString(),
+                            MessageMap.get(3).toString(),
+                            null,
+                            MessageMap.get(4).toString(),
+                            MessageMap.get(5).toString(),
 
-            if( MessageMap.size()>2){
+                           // MessageMap.get(6).toString()
+                           dayTokenGetService.dayTokenGetPrivate( MessageMap.get(4).toString(), MessageMap.get(5).toString()).toString()
+                    )
+            );
+                break;
+            case 7:  responsMessageMap.add(new ResponsMessageMap(
+                            MessageMap.get(0).toString(),
+                            Integer.parseInt(MessageMap.get(1).toString()),
+                            MessageMap.get(2).toString(),
+                            MessageMap.get(3).toString(),
+                           null,
+                            MessageMap.get(4).toString(),
+                            MessageMap.get(5).toString(),
+                            //MessageMap.get(6).toString()
+                            dayTokenGetService.dayTokenGetPrivate(MessageMap.get(4).toString(), MessageMap.get(5).toString()).toString()
+                    )
+            );
+                break;
+            case 6:
+                responsMessageMap.add(new ResponsMessageMap(
+                                MessageMap.get(0).toString(),
+                                Integer.parseInt(MessageMap.get(1).toString()),
+                                MessageMap.get(2).toString(),
+                                MessageMap.get(3).toString(),
+                               null,
+                                MessageMap.get(4).toString(),
+                                MessageMap.get(5).toString(),
+                        dayTokenGetService.dayTokenGetPrivate(MessageMap.get(4).toString(), MessageMap.get(5).toString())
+
+                        )
+                );
+                break;
+            case 5:
+                responsMessageMap.add(new ResponsMessageMap(
+                        MessageMap.get(0).toString(),
+                        Integer.parseInt(MessageMap.get(1).toString()),
+                        MessageMap.get(2).toString(),
+                        MessageMap.get(3).toString(),
+                        null,
+                                MessageMap.get(4).toString(),
+                        null,
+                        null
+                )
+                );
+
+                break;
+            case 4:
+                responsMessageMap.add(new ResponsMessageMap(
+                        MessageMap.get(0).toString(),
+                        Integer.parseInt(MessageMap.get(1).toString()),
+                        MessageMap.get(2).toString(),
+                        MessageMap.get(3).toString(),
+                        null,
+                        null,
+                        null,
+                        null));
+                break;
+            case 3:
                 responsMessageMap.add(new ResponsMessageMap(MessageMap.get(0).toString(),
                         Integer.parseInt(MessageMap.get(1).toString()),
-                        MessageMap.get(2).toString(), null,null));
+                        MessageMap.get(2).toString(), null,null, null,null,null));
 
-            } else {
+                break;
+
+            case 2:
                 responsMessageMap.add(new ResponsMessageMap(MessageMap.get(0).toString(),
                         Integer.parseInt(MessageMap.get(1).toString()),
-                       null, null, null));
-            }
+                        null, null, null, null,null,null));
+
+            default:
+                responsMessageMap.add(new ResponsMessageMap(MessageMap.get(0).toString(),
+                        Integer.parseInt(MessageMap.get(1).toString()),
+                        null, null, null, null,null,null));
+
         }
+
 
         return responsMessageMap;
     }

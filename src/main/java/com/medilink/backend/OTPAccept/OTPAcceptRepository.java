@@ -41,7 +41,7 @@ public class OTPAcceptRepository {
             return results;
         } catch (Exception e){
             List<String> results1= new ArrayList<>();
-            results1.add("Internal Error!@00@Error");
+            results1.add("Internal Error!@00@SQLError");
             return results1;
         }
 
@@ -57,7 +57,7 @@ public class OTPAcceptRepository {
             return results;
         } catch (Exception e){
             List<String> results1= new ArrayList<>();
-            results1.add("Internal Error!@00@Error");
+            results1.add("Internal Error!@00@SQLError");
             return results1;
         }
     }

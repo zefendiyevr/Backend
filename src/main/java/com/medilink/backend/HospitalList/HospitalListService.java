@@ -15,15 +15,15 @@ public class HospitalListService {
 
 
     @Autowired
-    HospitalListRepository hospitalListRepository;
+    public HospitalListRepository hospitalListRepository;
 
-    public MedilinkResponsTmp hospitalList(String Lang) {
+    public MedilinkResponsTmp HospitalList(String Lang) {
         MedilinkResponsTmp medilinkResponsTmp = new MedilinkResponsTmp();
         Data data = new Data();
-        medilinkResponsTmp.code = "200";
-        medilinkResponsTmp.message = "Successuful!";
+        medilinkResponsTmp.code =  "200";
+        medilinkResponsTmp.message =  "Successuful!";
         medilinkResponsTmp.response = data;
-        data.data = HospitalListMaping(hospitalListRepository.getHospitalList(Lang));
+        data.data = HospitalListMaping(hospitalListRepository.GetHospitalList(Lang));
         return medilinkResponsTmp;
     }
 
